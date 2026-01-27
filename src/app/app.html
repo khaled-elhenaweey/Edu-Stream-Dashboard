@@ -1,1 +1,19 @@
-<router-outlet />
+<div class="flex min-hi-screen bg-[#020617] text-slate-50 font-sans selection:bg-blue-500/30">
+
+  <aside class="w-72 border-r border-white/5 bg-white/2 backdrop-blur-md hidden md:flex flex-col">
+    <app-sidebar />
+  </aside>
+
+  <main class="flex-1 flex flex-col h-screen overflow-hidden">
+
+    <header class="h-16 border-b border-white/1 backdrop-blur-sm flex items-center px-8">
+      <app-header />
+    </header>
+
+    <section class="flex-1 overflow-y-auto p-8 custom-scrollbar">
+      <app-dashboard />
+    </section>
+
+  </main>
+
+</div>
