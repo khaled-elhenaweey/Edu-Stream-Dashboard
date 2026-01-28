@@ -17,4 +17,9 @@ export class Dashboard implements OnInit {
   ngOnInit(): void {
     this.coursesList = this.courseService.getCourses();
   }
+
+  handleDelete(id: string) {
+    this.courseService.deleteCourse(id);
+    this.coursesList = this.courseService.getCourses();
+  }
 }

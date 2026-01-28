@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Course } from '../../../core/models/course';
 
 @Component({
@@ -10,4 +10,9 @@ import { Course } from '../../../core/models/course';
 })
 export class CourseCard {
   @Input({ required: true }) course!: Course;
+  @Output() onDelete = new EventEmitter<string>();
+
+  requestDelete() {
+    this.onDelete.emit(this.course.id);
+  }
 }
