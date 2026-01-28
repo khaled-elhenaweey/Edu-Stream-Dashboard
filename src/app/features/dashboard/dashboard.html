@@ -1,1 +1,15 @@
-<p>dashboard works!</p>
+<div class="max-w-7xl mx-auto">
+  <div class="mb-10">
+    <h1 class="text-3xl font-bold text-white mb-2">My Learning Journey</h1>
+    <p class="text-white/50">
+      You have
+      <span class="text-blue-400 font-bold">{{ coursesList.length }}</span>
+      active courses this month.
+    </p>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    @for (course of coursesList; track $index) {
+    <app-course-card [course]="course" />
+    }
+  </div>
+</div>
