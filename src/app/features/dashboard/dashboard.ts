@@ -1,6 +1,6 @@
 import { Course } from './../../core/models/course';
 import { Course as CourseService } from './../../core/services/course';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CourseCard } from '../../shared/components/course-card/course-card';
 import { CommonModule } from '@angular/common';
 import { Modal } from '../../shared/components/modal/modal';
@@ -11,14 +11,28 @@ import { Modal } from '../../shared/components/modal/modal';
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
-export class Dashboard implements OnInit {
+export class Dashboard implements OnInit, AfterViewChecked {
   selectedCourseId: string | null = null;
   isModalOpen: boolean = false;
   coursesList: Course[] = [];
+  private hasFocused = false;
+
+  @ViewChild('confirmBtn') confirmBtn!: ElementRef;
   constructor(private courseService: CourseService) {}
 
   ngOnInit(): void {
     this.coursesList = this.courseService.getCourses();
+  }
+
+  ngAfterViewChecked(): void {
+    if (this.confirmBtn && !this.hasFocused) {
+      this.applyFoucs();
+      this.hasFocused = true;
+    }
+
+    if (!this.confirmBtn && this.hasFocused) {
+      this.hasFocused = false;
+    }
   }
 
   handleDelete(id: string) {
@@ -36,5 +50,9 @@ export class Dashboard implements OnInit {
   closeModal() {
     this.isModalOpen = false;
     this.selectedCourseId = null;
+  }
+  applyFoucs() {
+    this.confirmBtn.nativeElement.focus();
+    this.confirmBtn.nativeElement.style.border = '2px solid white';
   }
 }
