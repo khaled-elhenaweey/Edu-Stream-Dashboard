@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Course as CourseModel } from '../models/course';
+import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -119,13 +120,15 @@ export class Course {
       rating: 4.6,
     },
   ];
-
+  private coursesStore = new BehaviorSubject<CourseModel[]>(this.courses);
+  courses$ = this.coursesStore.asObservable();
   constructor() {}
   getCourses(): CourseModel[] {
     return this.courses;
   }
   deleteCourse(id: string): void {
-    this.courses = this.courses.filter((course) => course.id !== id);
-    console.log(`Course with id ${id} deleted`);
+    const currentList = this.coursesStore.value;
+    const newList = currentList.filter((course) => course.id !== id);
+    this.coursesStore.next(newList);
   }
 }

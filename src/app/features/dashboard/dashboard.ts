@@ -21,7 +21,9 @@ export class Dashboard implements OnInit, AfterViewChecked {
   constructor(private courseService: CourseService) {}
 
   ngOnInit(): void {
-    this.coursesList = this.courseService.getCourses();
+    this.courseService.courses$.subscribe((data) => {
+      this.coursesList = data;
+    });
   }
 
   ngAfterViewChecked(): void {
@@ -43,7 +45,6 @@ export class Dashboard implements OnInit, AfterViewChecked {
   confirmDeletion() {
     if (this.selectedCourseId) {
       this.courseService.deleteCourse(this.selectedCourseId);
-      this.coursesList = this.courseService.getCourses();
       this.closeModal();
     }
   }
