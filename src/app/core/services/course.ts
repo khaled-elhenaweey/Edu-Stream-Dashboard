@@ -126,7 +126,10 @@ export class Course {
   getCourses(): CourseModel[] {
     return this.courses;
   }
-  deleteCourse(id: string): void {
+  getCourseById(id: string): CourseModel | undefined {
+    return this.coursesStore.value.find((course) => course.id === id);
+  }
+  deleteCourse(id: string) {
     const currentList = this.coursesStore.value;
     const newList = currentList.filter((course) => course.id !== id);
     this.coursesStore.next(newList);

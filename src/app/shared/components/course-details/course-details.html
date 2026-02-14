@@ -1,1 +1,87 @@
-<p>course-details works!</p>
+@if (course) {
+<div class="max-w-5xl mx-auto space-y-8 animate-in fade-in duration-700">
+
+  <button routerLink="/dashboard"
+    class="flex items-center gap-2 text-slate-400 hover:text-blue-400 transition-all group">
+    <span class="p-2 rounded-lg bg-white/5 group-hover:bg-blue-500/10 transition-colors">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+    </span>
+    Back to Dashboard
+  </button>
+
+  <div class="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 backdrop-blur-xl">
+    <div
+      class="absolute top-0 right-0 w-[300px] h-[300px] bg-blue-600/20 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2">
+    </div>
+
+    <div class="relative p-8 md:p-12 flex flex-col md:flex-row gap-12 items-center">
+      <div class="w-full md:w-2/5 shrink-0">
+        <div class="relative group">
+          <div
+            class="absolute -inset-1 bg-linear-to-r from-blue-600 to-cyan-400 rounded-4xl blur opacity-25 group-hover:opacity-50 transition duration-1000">
+          </div>
+          <img [src]="course.imageUrl" [alt]="course.title"
+            class="relative w-full aspect-4/3 object-cover rounded-4xl shadow-2xl">
+        </div>
+      </div>
+
+      <div class="flex-1 space-y-6 text-center md:text-left">
+        <div class="space-y-2">
+          <span
+            class="px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase bg-blue-500/10 text-blue-400 border border-blue-500/20">
+            {{ course.level }} Course
+          </span>
+          <h1 class="text-4xl md:text-5xl font-extrabold text-white leading-tight">
+            {{ course.title }}
+          </h1>
+        </div>
+
+        <div class="flex items-center justify-center md:justify-start gap-4">
+          <div
+            class="w-12 h-12 rounded-full bg-linear-to-br from-slate-700 to-slate-800 border border-white/10 flex items-center justify-center text-xl">
+            👨‍🏫
+          </div>
+          <div>
+            <p class="text-sm text-slate-500 uppercase tracking-tighter">Instructor</p>
+            <p class="text-lg font-medium text-slate-200">{{ course.instructor }}</p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-4 pt-4 justify-center md:justify-start">
+          <div class="px-6 py-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+            <span class="block text-xs text-slate-500 uppercase">Price</span>
+            <span class="text-2xl font-bold text-white">${{ course.price }}</span>
+          </div>
+          <div class="px-6 py-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+            <span class="block text-xs text-slate-500 uppercase">Rating</span>
+            <span class="text-2xl font-bold text-yellow-500">⭐ {{ course.rating }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="p-6 rounded-3xl border border-white/10 bg-white/2 hover:bg-white/5 transition-colors">
+      <h3 class="text-white font-bold mb-2">Duration</h3>
+      <p class="text-slate-400">12 Weeks of intensive learning</p>
+    </div>
+    <div class="p-6 rounded-3xl border border-white/10 bg-white/2 hover:bg-white/5 transition-colors">
+      <h3 class="text-white font-bold mb-2">Language</h3>
+      <p class="text-slate-400">English with Arabic subtitles</p>
+    </div>
+    <div class="p-6 rounded-3xl border border-white/10 bg-white/2 hover:bg-white/5 transition-colors">
+      <h3 class="text-white font-bold mb-2">Certificate</h3>
+      <p class="text-slate-400">Verifiable Digital Certificate</p>
+    </div>
+  </div>
+
+</div>
+} @else {
+<div class="flex flex-col items-center justify-center h-96 text-slate-500">
+  <div class="animate-spin w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full mb-4"></div>
+  <p>Loading course details...</p>
+</div>
+}
