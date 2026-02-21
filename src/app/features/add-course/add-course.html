@@ -1,0 +1,42 @@
+<div class="max-w-2xl mx-auto p-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] mt-10">
+  <h2 class="text-3xl font-bold text-white mb-8">Add New Course</h2>
+
+  <form [formGroup]="courseForm" (ngSubmit)="onSubmit()" class="space-y-6">
+    <div>
+      <label class="block text-slate-400 mb-2">Course Title</label>
+      <input formControlName="title" type="text"
+        class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-blue-500 outline-none transition-all">
+      @if (courseForm.get('title')?.touched && courseForm.get('title')?.invalid) {
+      <small class="text-red-400 text-xs mt-1">Title is required (min 5 characters)</small>
+      }
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <label class="block text-slate-400 mb-2">Instructor Name</label>
+        <input formControlName="instructor" type="text"
+          class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white outline-none">
+        @if (courseForm.get('instructor')?.touched && courseForm.get('instructor')?.invalid) {
+        <small class="text-red-400 text-xs mt-1">Instructor name is required</small>
+        }
+      </div>
+      <div>
+        <label class="block text-slate-400 mb-2">Price ($)</label>
+        <input formControlName="price" type="number"
+          class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white outline-none">
+        @if (courseForm.get('price')?.touched && courseForm.get('price')?.invalid) {
+        <small class="text-red-400 text-xs mt-1">Price is required and must be greater than 10</small>
+        }
+      </div>
+    </div>
+
+    <div class="flex gap-4 pt-4">
+      <button type="button" routerLink="/dashboard"
+        class="flex-1 px-4 py-3 rounded-xl bg-white/5 text-white hover:bg-white/10 transition-all">Cancel</button>
+      <button type="submit" [disabled]="courseForm.invalid"
+        class="flex-1 px-4 py-3 rounded-xl bg-blue-600 text-white font-bold hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
+        Create Course
+      </button>
+    </div>
+  </form>
+</div>

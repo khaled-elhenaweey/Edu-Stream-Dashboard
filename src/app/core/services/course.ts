@@ -1,3 +1,4 @@
+import { AddCourse } from './../../features/add-course/add-course';
 import { Injectable } from '@angular/core';
 import { Course as CourseModel } from '../models/course';
 import { BehaviorSubject } from 'rxjs';
@@ -138,6 +139,11 @@ export class Course {
   getCourseById(id: string): CourseModel | undefined {
     return this.coursesStore.value.find((course) => course.id === id);
   }
+  addCourse(newCourse: CourseModel) {
+    const currentCourses = this.coursesStore.value;
+    this.coursesStore.next([newCourse, ...currentCourses]);
+  }
+
   deleteCourse(id: string) {
     const currentList = this.coursesStore.value;
     const newList = currentList.filter((course) => course.id !== id);
