@@ -52,11 +52,15 @@
         <div class="flex flex-wrap gap-4 pt-4 justify-center md:justify-start">
           <div class="px-6 py-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
             <span class="block text-xs text-slate-500 uppercase">Price</span>
-            <span class="text-2xl font-bold text-white">${{ course.price }}</span>
+            <span class="text-2xl font-bold text-white">{{ course.price | currency: 'USD' : 'symbol':'1.0-0' }}</span>
           </div>
           <div class="px-6 py-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
             <span class="block text-xs text-slate-500 uppercase">Rating</span>
             <span class="text-2xl font-bold text-yellow-500">⭐ {{ course.rating }}</span>
+          </div>
+          <div class="px-6 py-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm">
+            <span class="block text-xs text-slate-500 uppercase">Enrolled on</span>
+            <span class="text-2xl font-bold text-white">{{ course.createdAt | date:'mediumDate' }}</span>
           </div>
         </div>
       </div>

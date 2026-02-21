@@ -18,6 +18,7 @@ export class Course {
       progress: 40,
       imageUrl: 'https://placehold.co/600x400/0f172a/3b82f6?text=UI+Beginner',
       rating: 4.5,
+      createdAt: new Date(2026, 1, 18),
     },
     {
       id: '2',
@@ -30,6 +31,7 @@ export class Course {
       progress: 100,
       imageUrl: 'https://placehold.co/600x400/0f172a/06b6d4?text=HTML+CSS',
       rating: 4.9,
+      createdAt: new Date(2026, 2, 10),
     },
     {
       id: '3',
@@ -42,6 +44,7 @@ export class Course {
       progress: 0,
       imageUrl: 'https://placehold.co/600x400/0f172a/f43f5e?text=Marketing',
       rating: 4.2,
+      createdAt: new Date(2026, 2, 15),
     },
 
     // --- Intermediate Level ---
@@ -56,6 +59,7 @@ export class Course {
       progress: 65,
       imageUrl: 'https://placehold.co/600x400/0f172a/a855f7?text=Angular+Int',
       rating: 4.8,
+      createdAt: new Date(2026, 1, 5),
     },
     {
       id: '5',
@@ -68,6 +72,7 @@ export class Course {
       progress: 100,
       imageUrl: 'https://placehold.co/600x400/0f172a/10b981?text=TypeScript',
       rating: 4.7,
+      createdAt: new Date(2026, 1, 12),
     },
     {
       id: '6',
@@ -80,6 +85,7 @@ export class Course {
       progress: 15,
       imageUrl: 'https://placehold.co/600x400/0f172a/ef4444?text=NodeJS',
       rating: 4.4,
+      createdAt: new Date(2026, 1, 10),
     },
 
     // --- Expert Level ---
@@ -94,6 +100,7 @@ export class Course {
       progress: 25,
       imageUrl: 'https://placehold.co/600x400/0f172a/eab308?text=AI+Expert',
       rating: 5.0,
+      createdAt: new Date(2026, 1, 15),
     },
     {
       id: '8',
@@ -106,6 +113,7 @@ export class Course {
       progress: 100,
       imageUrl: 'https://placehold.co/600x400/0f172a/6366f1?text=Microservices',
       rating: 4.9,
+      createdAt: new Date(2026, 1, 13),
     },
     {
       id: '9',
@@ -118,6 +126,7 @@ export class Course {
       progress: 5,
       imageUrl: 'https://placehold.co/600x400/0f172a/ec4899?text=Security',
       rating: 4.6,
+      createdAt: new Date(2026, 1, 11),
     },
   ];
   private coursesStore = new BehaviorSubject<CourseModel[]>(this.courses);
