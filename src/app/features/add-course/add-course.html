@@ -7,7 +7,12 @@
       <input formControlName="title" type="text"
         class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-blue-500 outline-none transition-all">
       @if (courseForm.get('title')?.touched && courseForm.get('title')?.invalid) {
-      <small class="text-red-400 text-xs mt-1">Title is required (min 5 characters)</small>
+      <small class="text-red-400 text-xs mt-1 block">Title is required (min 5 characters)</small>
+      }
+      @if (courseForm.get('title')?.touched && courseForm.get('title')?.errors?.['forbiddenName']) {
+      <small class="text-orange-400 text-xs mt-1">Please use a professional title, avoid
+        "{{courseForm.get('title')?.errors?.['forbiddenName'].vlaue | json}}" words.
+      </small>
       }
     </div>
 
@@ -29,7 +34,29 @@
         }
       </div>
     </div>
+    <div class="grid grid-cols-2 gap-4">
 
+      <div>
+        <label class="block text-slate-400 mb-2">Course Level</label>
+        <select formControlName="level"
+          class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-blue-500 appearance-none cursor-pointer">
+          @for (lvl of levels; track lvl) {
+          <option [value]="lvl" class="bg-slate-900 text-white">{{ lvl }}</option>
+          }
+        </select>
+      </div>
+
+      <div>
+        <label class="block text-slate-400 mb-2">Initial Status</label>
+        <select formControlName="status"
+          class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-blue-500 appearance-none cursor-pointer">
+          @for (st of statuses; track st) {
+          <option [value]="st" class="bg-slate-900 text-white">{{ st }}</option>
+          }
+        </select>
+      </div>
+
+    </div>
     <div class="flex gap-4 pt-4">
       <button type="button" routerLink="/dashboard"
         class="flex-1 px-4 py-3 rounded-xl bg-white/5 text-white hover:bg-white/10 transition-all">Cancel</button>

@@ -1,25 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormBuilder,
+  FormGroup,
+  Validators,
+  AbstractControl,
+  ValidationErrors,
+} from '@angular/forms';
 import { Course as CourseService } from '../../core/services/course';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { CourseLevel, CourseStatus } from '../../core/models/course';
 
 @Component({
   selector: 'app-add-course',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './add-course.html',
   styleUrl: './add-course.css',
 })
 export class AddCourse implements OnInit {
   courseForm!: FormGroup;
+  levels: CourseLevel[] = ['Beginner', 'Intermediate', 'Expert'];
+  statuses: CourseStatus[] = ['Active', 'Completed', 'Archived'];
   constructor(
     private fb: FormBuilder,
     private courseService: CourseService,
     private router: Router,
   ) {}
 
+  forbiddenWordsValidator(control: AbstractControl): ValidationErrors | null {
+    const forbiddenWords = ['test', 'dummy', 'spam'];
+    const value = control.value?.toLowerCase();
+    const isForbidden = forbiddenWords.some((word) => value?.includes(word));
+    return isForbidden ? { forbiddenName: { vlaue: control.value } } : null;
+  }
   ngOnInit(): void {
     this.courseForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(5)]],
+      title: ['', [Validators.required, Validators.minLength(5), this.forbiddenWordsValidator]],
       instructor: ['', [Validators.required]],
       price: [0, [Validators.required, Validators.min(10)]],
       level: ['Beginner', [Validators.required]],
